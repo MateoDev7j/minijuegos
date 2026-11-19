@@ -6,9 +6,11 @@ const ACTION_DEFAULT = 'index';
 
 //Direccion base del proyecto para el navegador
 define('DEFINE_URL', '/miproyecto/');
-define('RUTA_VIEWS',__DIR__ .'/Views/');
-define('RUTA_JUGADORES',__DIR__ .'/data/jugadores.json');
-define('RUTA_JUEGOS',__DIR__ .'/data/juegos.json');
-define('RUTA_UPLOADS',__DIR__ .'/public/upload/juegos');
+//subimos a raiz
+define('RUTA_VIEWS', dirname(__DIR__) . '/Views/');
+define('RUTA_JUGADORES', dirname(__DIR__) . '/data/jugadores.json');
+define('RUTA_JUEGOS', dirname(__DIR__) . '/data/juegos.json');
+define('RUTA_UPLOADS', dirname(__DIR__) . '/public/uploads/juegos');
+/*************************************************************** */
 define('MAX_ZIP', 10 * 1024 * 1024 );
 define('CATEGORIAS',['Aventura', 'Estrategia', 'Puzzle','Arcade']);
