@@ -7,7 +7,7 @@
 
 ---
 
-## Resumen de Aportaciones
+## Resumen de Aportaciones de Mateo
 
 En esta actualización se ha implementado la arquitectura base de enrutamiento, gestión de sesiones, autenticación de usuarios y subida/validación de videojuegos.
 
