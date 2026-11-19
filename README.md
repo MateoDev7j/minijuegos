@@ -1,6 +1,7 @@
 # Plataforma_De_Videojuegos aportaciones del grupo:
+---
 # Registro de Cambios - Proyecto Minijuegos
-
+---
 **Autor:** Mateo Daniel Ortuño Ovando  
 **Rama / Commit:** Merge de cambios de Mateo hacia `main`
 
@@ -30,4 +31,6 @@ En esta actualización se ha implementado la arquitectura base de enrutamiento, 
 * **`FormSubirJuegoRequest`:** 
   * Saneamiento de los campos de texto del formulario de subida.
   * Validación de archivos adjuntos mediante variables nativas de PHP (`$_FILES`), controlando el nombre completo del archivo y verificando que no supere el tamaño máximo permitido.
-**Fin de aportaciones de Mateo Daniel Ortuño Ovando** 
+---
+# Fin de aportaciones de Mateo Daniel Ortuño Ovando
+---
