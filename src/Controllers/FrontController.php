@@ -1,47 +1,34 @@
 <?php
 declare(strict_types=1);
-
 namespace Controllers;
 
-/**
- * Controlador frontal: único punto de entrada de la aplicación.
- *
- * Lee ?controller=...&action=... de la URL, comprueba que existen
- * y llama a la acción. Si no es válido, muestra un error 404.
- *
- * Requiere las constantes CONTROLLER_DEFAULT y ACTION_DEFAULT (config/config.php).
- */
-class FrontController
-{
-    public static function main(): void
-    {
-        // Controlador y acción: los de la URL o los predeterminados
-        $controller_name = $_GET['controller'] ?? CONTROLLER_DEFAULT;
-        $action_name = $_GET['action'] ?? ACTION_DEFAULT;
+class FrontController {
+    public static function main(): void {
+        // 1. Obtenemos la ruta limpia sin parámetros GET (?id=1)
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '';
 
-
-        // Construimos el nombre completo de la clase: baraja -> Controllers\BarajaController
-        $nombre_controlador = 'Controllers\\' . ucfirst($controller_name) . 'Controller';
-
-        // El controlador debe existir y no pueden invocarse el frontal ni el de errores
-        if (
-            !class_exists($nombre_controlador)
-            || in_array($nombre_controlador, [self::class, ErrorController::class], true)
-        ) {
-            ErrorController::show_error404();
-            return;
+        // 2. Quitamos el prefijo DEFINE_URL ('/miproyecto/')
+        if (str_starts_with($uri, DEFINE_URL)) {
+            $uri = substr($uri, strlen(DEFINE_URL));
         }
 
-        $controlador = new $nombre_controlador();
+        // 3. Separamos por '/'
+        $partes = array_values(array_filter(explode('/', trim($uri, '/'))));
 
-        // is_callable comprueba si ese método está en la clase y
-        // además comprueba si quien pregunta puede llamarlo
-        //respeta la visibilidad: los métodos privados no cuentan
-        if (is_callable([$controlador, $action_name])) {
-            $controlador->$action_name();
-        } else {
-            ErrorController::show_error404();
+        // 4. Controlador y Acción (índice [0] es controlador, índice [1] es acción)
+        $nombreControlador = isset($partes[0]) ? ucfirst(strtolower($partes[0])) : ucfirst(CONTROLLER_DEFAULT);
+        $claseControlador = "Controllers\\{$nombreControlador}Controller";
+        $accion = isset($partes[1]) ? strtolower($partes[1]) : ACTION_DEFAULT;
+
+        if (class_exists($claseControlador)) {
+            $controlador = new $claseControlador();
+            if (method_exists($controlador, $accion)) {
+                $controlador->$accion();
+                return;
+            }
         }
+
+        http_response_code(404);
+        echo "Error 404: Página no encontrada.";
     }
-
 }
