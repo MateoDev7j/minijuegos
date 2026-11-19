@@ -8,7 +8,7 @@ use Lib\Pages;
 USE Requests\FormSubirJuegoRequest;
 
 
-class AuthController{
+class JuegoController{
 
     private Pages $pages;
     private JuegoModel $juegoModel;

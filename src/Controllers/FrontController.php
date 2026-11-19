@@ -20,9 +20,9 @@ class FrontController {
         $claseControlador = "Controllers\\{$nombreControlador}Controller";
         $accion = isset($partes[1]) ? strtolower($partes[1]) : ACTION_DEFAULT;
 
-        if (class_exists($claseControlador)) {
+        if(class_exists($claseControlador)){
             $controlador = new $claseControlador();
-            if (method_exists($controlador, $accion)) {
+            if(method_exists($controlador, $accion)){
                 $controlador->$accion();
                 return;
             }

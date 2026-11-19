@@ -89,8 +89,3 @@ class AuthController{
         exit;
     }
 }
-
-
-
-
-?>

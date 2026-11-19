@@ -5,6 +5,9 @@ namespace Requests;
 class FormSubirJuegoRequest{
     private array $datos = [];
     private array $errores = [];
+    //$request = new FormSubirJuegoRequest($_POST['juego'],$_FILES);
+    //entrada es el array de datos de formulario, 
+    //files el array de datos archivos que tenemos subidos en la web
      public function __construct(array $entrada, array $archivos)
     {
         $this->sanear($entrada,$archivos);
