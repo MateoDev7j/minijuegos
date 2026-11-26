@@ -47,7 +47,7 @@ class AuthController{
         ]);
     }
     public function login():void{
-        $erroes=[];
+        $errores=[];
         $datos=[];
         if($_SERVER['REQUEST_METHOD']==='POST') {
             $request = new FormLoginRequest($_POST['usuario']);
