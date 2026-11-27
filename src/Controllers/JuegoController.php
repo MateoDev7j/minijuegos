@@ -58,27 +58,6 @@ class JuegoController{
             'datos'=>$datos,
         ]);
     }
-    /** Descarga el ZIP con el nombre: autor_titulo.zip */
-    public function descargar(): void {
-        $archivo = basename($_GET['f'] ?? '');   // basename evita rutas tipo ../../
-
-        foreach ($this->juegoModel->todos() as $juego) {
-            if (basename($juego['archivo'] ?? '') === $archivo) {
-                $ruta = RUTA_UPLOADS . '/' . $archivo;
-                if (!is_file($ruta)) {
-                    break;
-                }
-                $nombre = ($juego['autor'] ?? '') . '_' . ($juego['titulo'] ?? '') . '.zip';
-                $nombre = str_replace(['"', '/', '\\'], '', $nombre); // evita caracteres que rompen la cabecera
-                header('Content-Type: application/zip');
-                header('Content-Disposition: attachment; filename="' . $nombre . '"');
-                header('Content-Length: ' . filesize($ruta));
-                readfile($ruta);
-                exit;
-            }
-        }
-        ErrorController::show_error404();
-    }
     /**FUNCION REDIRIGIR */
     private function redirigir(string $ruta): never {
         header('Location: ' . DEFINE_URL . $ruta);

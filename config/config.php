@@ -5,7 +5,7 @@ const CONTROLLER_DEFAULT = 'auth';
 const ACTION_DEFAULT = 'login';
 
 //Direccion base del proyecto para el navegador
-define('DEFINE_URL', '/tema5/minijuegos/public/');
+define('DEFINE_URL', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'], 2)), '/') . '/');
 //subimos a raiz
 define('RUTA_VIEWS', dirname(__DIR__) . '/Views/');
 define('RUTA_JUGADORES', dirname(__DIR__) . '/data/jugadores.json');
