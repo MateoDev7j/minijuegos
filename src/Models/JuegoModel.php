@@ -34,7 +34,15 @@ class JuegoModel
 
         return is_array($juegos) ? $juegos : [];
     }
+    public function juegosUsuario(string $email):?array{
+        $juegos = $this->todos();
 
+        $juegosFiltrados = array_filter($juegos, function ($juego) use ($email) {
+            return isset($juego['email']) && strcasecmp(trim($juego['email']), trim($email)) === 0;
+        });
+
+        return array_values($juegosFiltrados);
+    }
     // guarda el ZIP y sus datos en el JSON.
     public function guardar(array $datos, string $rutaTemporal): void
     {
@@ -61,6 +69,7 @@ class JuegoModel
             'titulo' => $datos['titulo'],
             'descripcion' => $datos['descripcion'],
             'autor' => $datos['autor'],
+            'email' => $datos['email'],
             'categoria' => $datos['categoria'],
             'archivo' => 'uploads/juegos/' . $nombreArchivo,
             'nombre_original' => $datos['nombre_original']

@@ -18,7 +18,7 @@
                     <p class="nota">Subido el <?= e($juego['fecha']) ?></p>
                 <?php endif; ?>
                 <!-- 'archivo' es la ruta relativa a public (uploads/juegos/xxxx.zip) -->
-                <a class="boton" href="<?= e(DEFINE_URL . ($juego['archivo'] ?? '')) ?>" download>Descargar ZIP</a>
+                 <a class="boton" href="<?= e(DEFINE_URL) ?>juego/descargar?f=<?= urlencode(basename($juego['archivo'] ?? '')) ?>">Descargar ZIP</a>
             </article>
         <?php endforeach; ?>
     </div>
